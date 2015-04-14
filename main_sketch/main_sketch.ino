@@ -10,8 +10,10 @@ void setup() {
   baseRotate.attach(16);
   baseJoint.attach(8);
   pinMode(A0,INPUT);
-  baseRotate.calibrate();
-  baseJoint.calibrate();
+  baseRotate.defaultGains();
+  baseJoint.defaultGains();
+  baseJoint.setMaxSpeed(255);
+  baseRotate.setMaxSpeed(255);
   baseRotate.calibrateZeroPosition();
   baseJoint.calibrateZeroPosition();
 }

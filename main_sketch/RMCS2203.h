@@ -9,7 +9,7 @@ public:
 	void attach(int addr);
         
         //Sets all gains to nominal values
-        void calibrate();
+        void defaultGains();
 	
 	void setSpeed(int speed);
 	int getSpeed();

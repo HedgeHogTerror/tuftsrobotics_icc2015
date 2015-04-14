@@ -11,7 +11,7 @@ void RMCS2203::attach(int addr){
 	address = addr;
 }
 
-void RMCS2203::calibrate()
+void RMCS2203::defaultGains()
 {
   setSpeedDamping(20);
   setPGain(1024);
