@@ -18,15 +18,15 @@ void setup() {
   baseJoint.calibrateZeroPosition();
 }
 
+
 void loop() {
-  int xVal = avgSensorVal(A0,20);
-  int yVal = avgSensorVal(A1,20);
-  int rollerVal = avgSensorVal(A2,20);
+  int xVal = avgSensorVal(A0,30);
+  int yVal = avgSensorVal(A1,30);
+  int rollerVal = avgSensorVal(A2,30);
   long servo1Pos = map(xVal,512,1023,0,900);
   long servo2Pos = map(yVal,512,1023,0,900);
   baseRotate.goToAbsPosition(servo1Pos);
   baseJoint.goToAbsPosition(servo2Pos);
-  
 }
 
 int avgSensorVal(int pin, int nSamples){

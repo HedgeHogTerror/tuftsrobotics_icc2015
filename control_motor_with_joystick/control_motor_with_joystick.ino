@@ -21,6 +21,8 @@ void loop() {
   long servo2Pos = map(rollerVal,512,1023,0,1800);
   MoveAbs(dc_servo1,servo1Pos);
   MoveAbs(dc_servo2,servo2Pos);
+  
+  
 }
 
 long ReadPos(int Address)
