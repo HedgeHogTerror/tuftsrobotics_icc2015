@@ -11,6 +11,15 @@ void RMCS2203::attach(int addr){
 	address = addr;
 }
 
+void RMCS2203::calibrate()
+{
+  setSpeedDamping(20);
+  setPGain(1024);
+  setIGain(2);
+  setSpeedFeedbackGain(644);
+  
+}
+
 void RMCS2203::setSpeed(int speed)
 {
   Wire.beginTransmission(address);

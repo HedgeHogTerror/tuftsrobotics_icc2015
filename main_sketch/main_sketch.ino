@@ -10,6 +10,8 @@ void setup() {
   baseRotate.attach(16);
   baseJoint.attach(8);
   pinMode(A0,INPUT);
+  baseRotate.calibrate();
+  baseJoint.calibrate();
   baseRotate.calibrateZeroPosition();
   baseJoint.calibrateZeroPosition();
 }
@@ -18,8 +20,8 @@ void loop() {
   int xVal = avgSensorVal(A0,20);
   int yVal = avgSensorVal(A1,20);
   int rollerVal = avgSensorVal(A2,20);
-  long servo1Pos = map(xVal,512,1023,0,1800);
-  long servo2Pos = map(yVal,512,1023,0,1800);
+  long servo1Pos = map(xVal,512,1023,0,900);
+  long servo2Pos = map(yVal,512,1023,0,900);
   baseRotate.goToAbsPosition(servo1Pos);
   baseJoint.goToAbsPosition(servo2Pos);
   

@@ -7,6 +7,9 @@ public:
 	RMCS2203(); //Constructor
 	
 	void attach(int addr);
+        
+        //Sets all gains to nominal values
+        void calibrate();
 	
 	void setSpeed(int speed);
 	int getSpeed();
