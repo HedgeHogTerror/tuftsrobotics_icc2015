@@ -4,7 +4,9 @@
 class RMCS2203{
 
 public:
-	RMCS2203(int addr); //Constructor
+	RMCS2203(); //Constructor
+	
+	void attach(int addr);
 	
 	void setSpeed(int speed);
 	int getSpeed();
@@ -16,6 +18,7 @@ public:
 	int getSpeedDamping();
 	
 	void setPosition(long pos);
+        void calibrateZeroPosition();
 	long getPosition();
 	void goToAbsPosition(long absPos);
 	void goToRelPosition(long relPos);
@@ -31,5 +34,7 @@ public:
 	
 private:
 	int address;
+	
+};
 
 #endif

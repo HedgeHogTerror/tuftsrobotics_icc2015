@@ -2,8 +2,12 @@
 #include <Wire.h>
 #include "RMCS2203.h"
 
-RMCS2203::RMCS2203(int addr)
+RMCS2203::RMCS2203()
 {
+	address = -1;
+}
+
+void RMCS2203::attach(int addr){
 	address = addr;
 }
 
@@ -92,6 +96,11 @@ void RMCS2203::setPosition(long pos)
   Wire.endTransmission();    // stop transmitting
 }
 
+void RMCS2203::calibrateZeroPosition()
+{
+  setPosition(0);
+}
+
 long RMCS2203::getPosition()
 {
   Wire.beginTransmission(address + 0); // send the slave address of the RMCS-220x and write bit 0 
@@ -114,6 +123,8 @@ void RMCS2203::goToAbsPosition(long absPos)
   Wire.write(4);
   Wire.write(absPos         & 0xff);
   Wire.write((absPos >>  8) & 0xff);
+  Wire.write((absPos >> 16) & 0xff);
+  Wire.write((absPos >> 24) & 0xff);
   Wire.endTransmission();    // stop transmitting
 }
 
@@ -123,12 +134,14 @@ void RMCS2203::goToRelPosition(long relPos)
   Wire.write(8);
   Wire.write(relPos         & 0xff);
   Wire.write((relPos >>  8) & 0xff);
+  Wire.write((relPos >> 16) & 0xff);
+  Wire.write((relPos >> 24) & 0xff);
   Wire.endTransmission();    // stop transmitting
 }
 
 
 
-void RMCS2203::setSpeedFeedbackGain(int gain);
+void RMCS2203::setSpeedFeedbackGain(int gain)
 {
   Wire.beginTransmission(address);
   Wire.write(5);

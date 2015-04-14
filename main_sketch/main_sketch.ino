@@ -1,11 +1,34 @@
-#define baseRotServo 16
-#define baseJointServo 8
+#include <Wire.h>
+
+#include "RMCS2203.h"
+
+RMCS2203 baseRotate;
+RMCS2203 baseJoint;
 
 void setup() {
-  // put your setup code here, to run once:
+  Wire.begin();
+  baseRotate.attach(16);
+  baseJoint.attach(8);
+  pinMode(A0,INPUT);
+  baseRotate.calibrateZeroPosition();
+  baseJoint.calibrateZeroPosition();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  int xVal = avgSensorVal(A0,20);
+  int yVal = avgSensorVal(A1,20);
+  int rollerVal = avgSensorVal(A2,20);
+  long servo1Pos = map(xVal,512,1023,0,1800);
+  long servo2Pos = map(yVal,512,1023,0,1800);
+  baseRotate.goToAbsPosition(servo1Pos);
+  baseJoint.goToAbsPosition(servo2Pos);
+  
+}
 
+int avgSensorVal(int pin, int nSamples){
+  long sum = 0;
+  for (int i=0; i<nSamples; i++){
+    sum += analogRead(pin);
+  }
+  return (sum / nSamples);
 }
