@@ -109,9 +109,21 @@ void SetPos(byte Address, long Position)
   Wire.endTransmission();
 }
 
-long ReadPos(void)
+long ReadPos(int Address)
 {
+  Wire.beginTransmission(Address + 0); // send the slave address of the RMCS-220x and write bit 0 
   
+  /*
+  Wire.beginTransmission(Address + 1); // send I2C address with repeated start and 1 to read 
+  
+  byte posMSB = I2C_Read_Ack(); // read speed LSB byte and ack 
+  
+  byte posLSB = I2C_Read_Nak(); // read speed MSB byte and don’t ack
+  */
+  Wire.requestFrom(Address,2);
+  byte posLSB = Wire.read();
+  byte posMSB = Wire.read();
+  Wire.endTransmission(); // send I2C stop
 }
 
 void Demo(void)
